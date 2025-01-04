@@ -7,21 +7,21 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/django-multiselectfield-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/django-multiselectfield-{{ version }}.tar.gz
   sha256: d0a4c71568fb2332c71478ffac9f8708e01314a35cf923dfd7a191343452f9f9
 
 build:
   noarch: python
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
-    - python >=3.4
+    - python {{ python_min }}
     - pip
   run:
     - django >=1.4
-    - python >=3.4
+    - python >={{ python_min }}
 
 test:
   imports:
@@ -29,6 +29,7 @@ test:
     - multiselectfield.db
   requires:
     - pip
+    - python {{ python_min }}
   commands:
     - pip check
 
